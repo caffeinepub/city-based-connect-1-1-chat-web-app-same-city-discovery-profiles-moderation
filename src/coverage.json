@@ -1,0 +1,152 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-10T11:10:13.753Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 5,
+    "implemented": 5,
+    "items": [
+      {
+        "id": "REQ-29",
+        "summary": "Update the global visual theme to a romantic, soft iOS-inspired palette using pastel pink/purple/soft red tones, light gradients, and subtle glow effects, while keeping the UI clean and minimal (not over-animated). Apply the theme consistently across all screens (Login, Home/People discovery, Chat list/thread, Profile, sheets/dialogs).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/features/shell/BottomNav.tsx",
+          "frontend/src/features/auth/LoginScreen.tsx",
+          "frontend/src/features/city/CityPickerSheet.tsx",
+          "frontend/src/features/moderation/ReportDialog.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/features/shell/BottomNav.tsx",
+          "frontend/src/features/auth/LoginScreen.tsx",
+          "frontend/src/features/city/CityPickerSheet.tsx",
+          "frontend/src/features/moderation/ReportDialog.tsx"
+        ]
+      },
+      {
+        "id": "REQ-30",
+        "summary": "Implement reusable iOS-style live touch motion for interactive elements across the app: (1) buttons slightly scale down then bounce back on tap, (2) cards gently lift with a stronger shadow on touch/press, and (3) bottom navigation items and list rows get a subtle pressed-state feedback. Use a shared, reusable approach so the behavior is consistent across screens.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/features/shared/motion/useReducedMotion.ts",
+          "frontend/src/features/shared/motion/Pressable.tsx",
+          "frontend/src/features/shared/motion/LiftCard.tsx",
+          "frontend/src/features/shared/motion/PressableRow.tsx",
+          "frontend/src/features/auth/LoginScreen.tsx",
+          "frontend/src/features/shell/BottomNav.tsx",
+          "frontend/src/features/home/UserCard.tsx",
+          "frontend/src/features/chat/ChatListScreen.tsx",
+          "frontend/src/features/chat/ChatThreadScreen.tsx",
+          "frontend/src/features/profile/ProfileScreen.tsx",
+          "frontend/src/features/city/CityPickerSheet.tsx",
+          "frontend/src/features/home/UserPreviewSheet.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/features/shared/motion/useReducedMotion.ts",
+          "frontend/src/features/shared/motion/Pressable.tsx",
+          "frontend/src/features/shared/motion/LiftCard.tsx",
+          "frontend/src/features/shared/motion/PressableRow.tsx",
+          "frontend/src/features/auth/LoginScreen.tsx",
+          "frontend/src/features/shell/BottomNav.tsx",
+          "frontend/src/features/home/UserCard.tsx",
+          "frontend/src/features/chat/ChatListScreen.tsx",
+          "frontend/src/features/chat/ChatThreadScreen.tsx",
+          "frontend/src/features/profile/ProfileScreen.tsx",
+          "frontend/src/features/city/CityPickerSheet.tsx",
+          "frontend/src/features/home/UserPreviewSheet.tsx"
+        ]
+      },
+      {
+        "id": "REQ-31",
+        "summary": "Add smooth page/screen transitions (fade + slight slide) when switching between main tabs (Home/People/Chat/Profile) and when entering/exiting a chat thread. Ensure transitions feel premium and do not introduce layout jank.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/features/shared/motion/ScreenTransition.tsx",
+          "frontend/tailwind.config.js",
+          "frontend/src/features/shell/AppShell.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/features/shared/motion/ScreenTransition.tsx",
+          "frontend/tailwind.config.js",
+          "frontend/src/features/shell/AppShell.tsx"
+        ]
+      },
+      {
+        "id": "REQ-32",
+        "summary": "Add subtle anime-inspired micro-animations that remain lightweight: (1) very light floating hearts or spark effects used sparingly as ambient UI accents, (2) smooth avatar entrance animation where avatars/cards/images appear, and (3) gentle breathing animation on profile photos/avatars (e.g., on the Profile screen and other prominent avatar displays).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/features/shared/motion/AmbientSparkles.tsx",
+          "frontend/tailwind.config.js",
+          "frontend/src/features/auth/LoginScreen.tsx",
+          "frontend/src/features/home/UserCard.tsx",
+          "frontend/src/features/home/UserPreviewSheet.tsx",
+          "frontend/src/features/profile/ProfileScreen.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/features/shared/motion/AmbientSparkles.tsx",
+          "frontend/tailwind.config.js",
+          "frontend/src/features/auth/LoginScreen.tsx",
+          "frontend/src/features/home/UserCard.tsx",
+          "frontend/src/features/home/UserPreviewSheet.tsx",
+          "frontend/src/features/profile/ProfileScreen.tsx"
+        ]
+      },
+      {
+        "id": "REQ-33",
+        "summary": "Ensure all motion and effects remain performance-friendly and respect accessibility preferences: provide reduced-motion behavior via the user’s system setting so animations are minimized/disabled when `prefers-reduced-motion` is enabled.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/src/features/shared/motion/useReducedMotion.ts",
+          "frontend/src/features/shared/motion/Pressable.tsx",
+          "frontend/src/features/shared/motion/ScreenTransition.tsx",
+          "frontend/src/features/shared/motion/AmbientSparkles.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/src/features/shared/motion/useReducedMotion.ts",
+          "frontend/src/features/shared/motion/Pressable.tsx",
+          "frontend/src/features/shared/motion/ScreenTransition.tsx",
+          "frontend/src/features/shared/motion/AmbientSparkles.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/features/auth/LoginScreen.tsx",
+    "frontend/src/features/chat/ChatListScreen.tsx",
+    "frontend/src/features/chat/ChatThreadScreen.tsx",
+    "frontend/src/features/city/CityPickerSheet.tsx",
+    "frontend/src/features/home/UserCard.tsx",
+    "frontend/src/features/home/UserPreviewSheet.tsx",
+    "frontend/src/features/moderation/ReportDialog.tsx",
+    "frontend/src/features/profile/ProfileScreen.tsx",
+    "frontend/src/features/shared/motion/AmbientSparkles.tsx",
+    "frontend/src/features/shared/motion/LiftCard.tsx",
+    "frontend/src/features/shared/motion/Pressable.tsx",
+    "frontend/src/features/shared/motion/PressableRow.tsx",
+    "frontend/src/features/shared/motion/ScreenTransition.tsx",
+    "frontend/src/features/shared/motion/useReducedMotion.ts",
+    "frontend/src/features/shell/AppShell.tsx",
+    "frontend/src/features/shell/BottomNav.tsx",
+    "frontend/src/index.css",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

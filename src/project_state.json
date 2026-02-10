@@ -1,0 +1,392 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 13,
+  "summary": "Cross-platform (iOS/Android) city-based social/chat app with OTP/Google/Apple auth, profiles (including gender), same-city discovery and in-city search/browse with free profile viewing, privacy-preserving distance display, iOS-style UI with bottom navigation (Home/People/Chat/Profile), moderation tools, paid DM/chat-limit plans, and a premium iOS HIG-inspired romantic pastel theme with lightweight touch/micro-animations and smooth page transitions.",
+  "architectural_notes": [
+    "Cross-platform iOS/Android app with simple, scalable structure.",
+    "Location privacy requirement: never display exact location; only show distance.",
+    "Discovery scope constrained to same-city users; city derived from GPS with manual override.",
+    "Discovery filtering rule: require gender at signup and apply gender preference filtering (show opposite-gender profiles only).",
+    "Monetization uses tiered chat limits (2 or 7 people) with an optional 2-month validity; when limit is reached, lock starting/continuing chats as specified and prompt plan upgrade; keep enforcement simple and stable.",
+    "Monetization scope: search/browse and profile viewing remain free; only DM/chat is limited for conversion.",
+    "Discovery constraints: same-city filter always ON; gender/connect-with filtering applied to discovery/search results.",
+    "Visual theme update: romantic, soft pastel palette (pink/purple/soft red) with light gradients and subtle glow; still iOS HIG-inspired and minimal.",
+    "Motion/animation guidelines: live touch feedback (button scale+bounce, card lift+shadow), smooth page transitions (fade+slide), subtle anime-inspired micro-animations (light hearts/sparks, avatar entrance, gentle breathing on profile photos); keep animations lightweight and performant."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-authentication-using-internet-identity-ii-and-gate-all-user-actions-discovery-chat-profile-edit-block-report-behind-login",
+      "title": "Implement authentication using Internet Identity (II) and gate all user actions (discovery, chat, profile edit, block/report) behind login.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-user-profile-model-and-ui-that-supports-profile-photo-uploaded-image-name-short-bio-city-and-interests-allow-users-to-view-and-edit-their-own-profile",
+      "title": "Create a user profile model and UI that supports: profile photo (uploaded image), name, short bio, city, and interests; allow users to view and edit their own profile.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-city-scoping-only-show-users-whose-profile-city-matches-the-current-user-s-selected-city-provide-manual-city-selection-change-in-the-ui",
+      "title": "Implement city scoping: only show users whose profile city matches the current user’s selected city; provide manual city selection/change in the UI.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-main-ui-shell-with-a-clean-ios-style-interface-and-bottom-navigation-with-three-tabs-home-chat-profile",
+      "title": "Build the main UI shell with a clean iOS-style interface and bottom navigation with three tabs: Home, Chat, Profile.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-same-city-user-discovery-on-the-home-tab-show-a-list-grid-of-other-users-in-the-same-city-with-their-photo-name-short-bio-interests-preview-and-distance-without-exposing-exact-location",
+      "title": "Implement same-city user discovery on the Home tab: show a list/grid of other users in the same city with their photo, name, short bio, interests preview, and distance (without exposing exact location).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-one-to-one-chat-allow-users-to-start-a-conversation-from-discovery-user-profile-and-exchange-messages-provide-a-chat-tab-showing-conversation-list-and-a-conversation-detail-screen",
+      "title": "Implement one-to-one chat: allow users to start a conversation from discovery/user profile and exchange messages; provide a Chat tab showing conversation list and a conversation detail screen.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enforce-a-first-chat-free-rule-allow-a-user-to-start-chatting-with-exactly-one-new-person-for-free-after-that-prevent-initiating-new-conversations-and-show-a-clear-ui-message-explaining-the-limit",
+      "title": "Enforce a 'first chat free' rule: allow a user to start chatting with exactly one new person for free; after that, prevent initiating new conversations and show a clear UI message explaining the limit.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-safety-features-allow-users-to-block-and-report-other-users-blocked-users-must-not-appear-in-discovery-and-must-not-be-able-to-message-each-other",
+      "title": "Add safety features: allow users to block and report other users; blocked users must not appear in discovery and must not be able to message each other.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-simple-scalable-code-structure-define-clear-backend-modules-types-for-profiles-discovery-chat-moderation-and-limits-define-clear-frontend-feature-folders-and-shared-ui-patterns",
+      "title": "Implement a simple, scalable code structure: define clear backend modules/types for profiles, discovery, chat, moderation, and limits; define clear frontend feature folders and shared UI patterns.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-establish-a-coherent-visual-theme-not-blue-purple-consistent-across-the-app-a-light-ios-inspired-palette-soft-neutrals-rounded-cards-subtle-dividers-and-typography-hierarchy-apply-consistently-to-all-screens",
+      "title": "Establish a coherent visual theme (not blue/purple) consistent across the app: a light iOS-inspired palette (soft neutrals), rounded cards, subtle dividers, and typography hierarchy; apply consistently to all screens.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-image-assets-icon-lightweight-illustrations-to-the-frontend-and-use-them-in-the-ui-e-g-app-icon-empty-states-from-frontend-public-assets-generated-without-routing-images-through-the-backend",
+      "title": "Add generated static image assets (icon + lightweight illustrations) to the frontend and use them in the UI (e.g., app icon, empty states) from frontend/public/assets/generated without routing images through the backend.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-extend-the-user-profile-model-to-include-1-the-user-s-gender-male-or-female-and-2-the-gender-they-want-to-connect-with-male-or-female-and-enforce-that-these-fields-are-required-for-profile-creation-updates",
+      "title": "Extend the user Profile model to include (1) the user’s gender (Male or Female) and (2) the gender they want to connect with (Male or Female), and enforce that these fields are required for profile creation/updates.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-profile-setup-flow-to-require-selecting-gender-male-female-and-selecting-which-gender-the-user-wants-to-connect-with-male-female-before-allowing-profile-creation",
+      "title": "Update the profile setup flow to require selecting gender (Male/Female) and selecting which gender the user wants to connect with (Male/Female) before allowing profile creation.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-profile-edit-ui-to-allow-the-user-to-view-and-edit-their-gender-and-connect-with-gender-selections",
+      "title": "Update the profile edit UI to allow the user to view and edit their gender and connect-with gender selections.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enforce-the-opposite-gender-profiles-rule-by-ensuring-the-discovery-ui-only-displays-results-consistent-with-the-backend-filtering-and-provide-clear-english-guidance-if-the-user-s-profile-gender-connect-with-settings-prevent-any-matches-from-showing",
+      "title": "Enforce the “opposite-gender profiles” rule by ensuring the discovery UI only displays results consistent with the backend filtering, and provide clear English guidance if the user’s profile gender/connect-with settings prevent any matches from showing.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-app-shell-bottom-navigation-to-include-four-tabs-home-people-chat-profile-ensure-people-routes-to-the-discovery-experience-current-discovery-screen",
+      "title": "Update the app shell bottom navigation to include four tabs: Home, People, Chat, Profile; ensure People routes to the discovery experience (current discovery screen).",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-first-chat-free-chat-initiation-limit-with-three-paid-plan-limits-98-plan-allows-chatting-with-up-to-2-people-199-plan-allows-chatting-with-up-to-7-people-and-399-plan-allows-chatting-with-up-to-7-people-and-is-valid-for-2-months",
+      "title": "Replace the current \"first chat free\" chat-initiation limit with three paid plan limits: ₹98 plan allows chatting with up to 2 people, ₹199 plan allows chatting with up to 7 people, and ₹399 plan allows chatting with up to 7 people and is valid for 2 months.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-chat-limit-handling-so-that-when-the-backend-returns-a-chat-limit-error-the-app-shows-an-upgrade-prompt-listing-the-three-updated-plans-98-2-people-199-7-people-399-7-people-for-2-months-in-english-and-provides-a-simple-action-to-upgrade",
+      "title": "Update frontend chat-limit handling so that when the backend returns a chat-limit error, the app shows an upgrade prompt listing the three updated plans (₹98/2 people, ₹199/7 people, ₹399/7 people for 2 months) in English and provides a simple action to upgrade.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-keep-the-overall-plan-limit-system-simple-and-stable-by-minimizing-changes-to-unrelated-chat-discovery-profile-and-moderation-flows-and-ensuring-all-user-facing-text-related-to-plans-limits-is-in-english",
+      "title": "Keep the overall plan/limit system simple and stable by minimizing changes to unrelated chat, discovery, profile, and moderation flows, and ensuring all user-facing text related to plans/limits is in English.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-in-list-search-experience-to-the-existing-same-city-people-discover-browsing-ui-so-that-users-can-search-within-the-currently-selected-city-and-see-matching-profiles",
+      "title": "Add an in-list search experience to the existing same-city People/Discover browsing UI so that users can search within the currently selected city and see matching profiles.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-users-can-open-and-view-another-user-s-profile-from-the-browse-search-results-using-the-existing-profile-preview-ui-and-that-the-opened-profile-reflects-the-selected-user-from-the-filtered-results",
+      "title": "Ensure users can open and view another user’s profile from the browse/search results using the existing profile preview UI, and that the opened profile reflects the selected user from the filtered results.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-discovery-city-scope-is-always-applied-by-defaulting-the-people-discover-experience-to-the-caller-s-profile-city-once-the-profile-loads-so-users-are-not-prompted-to-select-a-city-when-their-profile-already-has-one",
+      "title": "Ensure the discovery city scope is always applied by defaulting the People/Discover experience to the caller’s profile city once the profile loads (so users are not prompted to select a city when their profile already has one).",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-make-it-explicit-in-the-ui-that-browsing-search-and-profile-viewing-are-free-and-that-only-direct-messaging-starting-sending-messages-is-limited-by-the-plan-system-keep-all-user-facing-copy-in-english",
+      "title": "Make it explicit in the UI that browsing/search and profile viewing are free, and that only direct messaging (starting/sending messages) is limited by the plan system; keep all user-facing copy in English.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-sending-a-message-fails-due-to-a-chat-limit-subscription-restriction-show-the-same-upgrade-prompt-used-for-chat-initiation-instead-of-only-a-generic-toast-using-the-existing-chat-limit-error-parsing-behavior",
+      "title": "When sending a message fails due to a chat-limit/subscription restriction, show the same upgrade prompt used for chat initiation (instead of only a generic toast), using the existing chat-limit error parsing behavior.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-global-visual-theme-to-a-romantic-soft-ios-inspired-palette-using-pastel-pink-purple-soft-red-tones-light-gradients-and-subtle-glow-effects-while-keeping-the-ui-clean-and-minimal-not-over-animated-apply-the-theme-consistently-across-all-screens-login-home-people-discovery-chat-list-thread-profile-sheets-dialogs",
+      "title": "Update the global visual theme to a romantic, soft iOS-inspired palette using pastel pink/purple/soft red tones, light gradients, and subtle glow effects, while keeping the UI clean and minimal (not over-animated). Apply the theme consistently across all screens (Login, Home/People discovery, Chat list/thread, Profile, sheets/dialogs).",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-reusable-ios-style-live-touch-motion-for-interactive-elements-across-the-app-1-buttons-slightly-scale-down-then-bounce-back-on-tap-2-cards-gently-lift-with-a-stronger-shadow-on-touch-press-and-3-bottom-navigation-items-and-list-rows-get-a-subtle-pressed-state-feedback-use-a-shared-reusable-approach-so-the-behavior-is-consistent-across-screens",
+      "title": "Implement reusable iOS-style live touch motion for interactive elements across the app: (1) buttons slightly scale down then bounce back on tap, (2) cards gently lift with a stronger shadow on touch/press, and (3) bottom navigation items and list rows get a subtle pressed-state feedback. Use a shared, reusable approach so the behavior is consistent across screens.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-smooth-page-screen-transitions-fade-slight-slide-when-switching-between-main-tabs-home-people-chat-profile-and-when-entering-exiting-a-chat-thread-ensure-transitions-feel-premium-and-do-not-introduce-layout-jank",
+      "title": "Add smooth page/screen transitions (fade + slight slide) when switching between main tabs (Home/People/Chat/Profile) and when entering/exiting a chat thread. Ensure transitions feel premium and do not introduce layout jank.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-subtle-anime-inspired-micro-animations-that-remain-lightweight-1-very-light-floating-hearts-or-spark-effects-used-sparingly-as-ambient-ui-accents-2-smooth-avatar-entrance-animation-where-avatars-cards-images-appear-and-3-gentle-breathing-animation-on-profile-photos-avatars-e-g-on-the-profile-screen-and-other-prominent-avatar-displays",
+      "title": "Add subtle anime-inspired micro-animations that remain lightweight: (1) very light floating hearts or spark effects used sparingly as ambient UI accents, (2) smooth avatar entrance animation where avatars/cards/images appear, and (3) gentle breathing animation on profile photos/avatars (e.g., on the Profile screen and other prominent avatar displays).",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-all-motion-and-effects-remain-performance-friendly-and-respect-accessibility-preferences-provide-reduced-motion-behavior-via-the-user-s-system-setting-so-animations-are-minimized-disabled-when-prefers-reduced-motion-is-enabled",
+      "title": "Ensure all motion and effects remain performance-friendly and respect accessibility preferences: provide reduced-motion behavior via the user’s system setting so animations are minimized/disabled when `prefers-reduced-motion` is enabled.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Cross-platform mobile app (iOS & Android) with clean iOS-style UI and bottom navigation (Home, Chat, Profile)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Same-city user discovery: show only users in the same city",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "City detection via GPS with manual city selection override",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Authentication: phone number OTP login/signup",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Authentication: Google login",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Authentication: Apple login (iOS)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "User profiles with photo, name, short bio, city, and interests",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "One-to-one chat between users",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Safety/moderation: block and report users",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Privacy: do not show exact location; show only distance",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Use a simple, scalable app structure/architecture",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Signup requires selecting gender (Male/Female) and choosing which gender to connect with; discovery shows only opposite-gender profiles accordingly",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Filter discovery results to show only profiles in the selected city that match the current user’s connect-with gender, and exclude the caller’s own profile; blocked users must continue to be excluded.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Add a conditional Motoko state migration to safely handle existing stored profiles when introducing the new gender and connect-with fields (e.g., populate them with sensible defaults or mark them as unset in a backward-compatible way), without breaking reads for existing users.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Monetization/limits: replace 'first chat free' with paid plans (₹98: chat up to 2 people; ₹199: chat up to 7 people; ₹399: chat up to 7 people valid for 2 months) and enforce 1:1 only, lock chat when limit reached, prompt user to upgrade",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Implement backend subscription state per user, including active plan, start time, and (when applicable) expiry time; enforce expiry so that the ₹399 plan stops granting benefits after 2 months.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Enforce one-to-one chat only and lock chat initiation when the user has reached their plan’s chat-with-people limit; when locked, the backend must return a stable, parseable English error that instructs the user to upgrade.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Same-city search/browse: allow users to search for and browse profiles within their selected city (respecting existing discovery filters)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Profile viewing: allow users to open and view other users’ profiles from search/browse/discovery",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Keep search/browse and profile viewing free (not paywalled); apply monetization limits only to DM/chat initiation/continuation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "UI/UX polish: add premium iOS-style touch animations (button bounce/scale, card lift/shadow), smooth page transitions (fade+slide), romantic pastel theme (pink/purple/soft red gradients + subtle glow), and lightweight anime-inspired micro-animations (subtle hearts/sparks, avatar entrance, gentle breathing profile photos) while keeping performance fast",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "City-based connect & 1:1 chat web app (same-city discovery, profiles, moderation)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

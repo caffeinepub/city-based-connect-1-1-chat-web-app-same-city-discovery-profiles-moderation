@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1.25rem;
+        /* Romantic pastel palette - light mode */
+        --background: 0.98 0.02 330;
+        --foreground: 0.25 0.03 340;
+        --card: 0.99 0.015 330;
+        --card-foreground: 0.25 0.03 340;
+        --popover: 0.99 0.015 330;
+        --popover-foreground: 0.25 0.03 340;
+        --primary: 0.65 0.18 350;
+        --primary-foreground: 0.99 0.01 330;
+        --secondary: 0.88 0.08 320;
+        --secondary-foreground: 0.35 0.04 340;
+        --muted: 0.94 0.04 330;
+        --muted-foreground: 0.55 0.04 340;
+        --accent: 0.75 0.15 10;
+        --accent-foreground: 0.99 0.01 330;
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0.01 330;
+        --border: 0.92 0.03 330;
+        --input: 0.92 0.03 330;
+        --ring: 0.65 0.18 350;
+        --chart-1: 0.65 0.18 350;
+        --chart-2: 0.7 0.15 320;
+        --chart-3: 0.75 0.12 10;
+        --chart-4: 0.7 0.2 280;
+        --chart-5: 0.75 0.18 300;
+        --sidebar: 0.98 0.02 330;
+        --sidebar-foreground: 0.25 0.03 340;
+        --sidebar-primary: 0.65 0.18 350;
+        --sidebar-primary-foreground: 0.99 0.01 330;
+        --sidebar-accent: 0.94 0.04 330;
+        --sidebar-accent-foreground: 0.35 0.04 340;
+        --sidebar-border: 0.92 0.03 330;
+        --sidebar-ring: 0.65 0.18 350;
+    }
+
+    .dark {
+        /* Romantic pastel palette - dark mode */
+        --background: 0.18 0.04 340;
+        --foreground: 0.95 0.02 330;
+        --card: 0.22 0.04 340;
+        --card-foreground: 0.95 0.02 330;
+        --popover: 0.24 0.04 340;
+        --popover-foreground: 0.95 0.02 330;
+        --primary: 0.75 0.18 350;
+        --primary-foreground: 0.2 0.04 340;
+        --secondary: 0.3 0.06 340;
+        --secondary-foreground: 0.95 0.02 330;
+        --muted: 0.28 0.05 340;
+        --muted-foreground: 0.65 0.03 330;
+        --accent: 0.65 0.15 10;
+        --accent-foreground: 0.95 0.02 330;
+        --destructive: 0.6 0.2 25;
+        --destructive-foreground: 0.95 0.02 330;
+        --border: 0.32 0.05 340;
+        --input: 0.32 0.05 340;
+        --ring: 0.75 0.18 350;
+        --chart-1: 0.75 0.18 350;
+        --chart-2: 0.7 0.15 320;
+        --chart-3: 0.75 0.12 10;
+        --chart-4: 0.7 0.2 280;
+        --chart-5: 0.75 0.18 300;
+        --sidebar: 0.22 0.04 340;
+        --sidebar-foreground: 0.95 0.02 330;
+        --sidebar-primary: 0.75 0.18 350;
+        --sidebar-primary-foreground: 0.2 0.04 340;
+        --sidebar-accent: 0.3 0.06 340;
+        --sidebar-accent-foreground: 0.95 0.02 330;
+        --sidebar-border: 0.32 0.05 340;
+        --sidebar-ring: 0.75 0.18 350;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(180deg, oklch(var(--background)) 0%, oklch(0.96 0.03 330) 100%);
+        background-attachment: fixed;
+    }
+
+    .safe-area-inset-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Soft glow utility */
+@layer utilities {
+    .glow-soft {
+        box-shadow: 0 0 20px oklch(var(--primary) / 0.15),
+                    0 4px 12px oklch(var(--primary) / 0.1);
+    }
+    
+    .glow-soft-accent {
+        box-shadow: 0 0 20px oklch(var(--accent) / 0.15),
+                    0 4px 12px oklch(var(--accent) / 0.1);
+    }
+}

@@ -1,2 +1,3 @@
-# city-based-connect-1-1-chat-web-app-same-city-discovery-profiles-moderation
-Exported from Caffeine project: City-based connect &amp; 1:1 chat web app (same-city discovery, profiles, moderation)
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

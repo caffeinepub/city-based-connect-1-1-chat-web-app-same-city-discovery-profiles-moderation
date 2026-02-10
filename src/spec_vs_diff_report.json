@@ -1,0 +1,39 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-10T11:10:13.749Z",
+  "summary": "Diff implements a romantic pastel global theme via CSS variables, adds reusable motion components (Pressable/LiftCard/PressableRow), introduces fade+slide screen transitions via ScreenTransition in AppShell, adds lightweight ambient hearts/sparkles and avatar entrance/breathing animations, and includes reduced-motion handling. One apparent unrequested product feature (discovery search/filter) is described in the updated file summaries.",
+  "missing_requirements": [],
+  "hallucinated_features": [
+    {
+      "description": "Added an in-list search input / filtering logic on the Home/Discovery screen (same-city profiles filtered by name), which is a new product feature and explicitly listed as a non-goal (filters/new discovery logic).",
+      "reason": "BuildRequest non-goals prohibit adding new product features like filters or new discovery logic; the diff summary text indicates such a feature exists.",
+      "evidence": [
+        "frontend-file-summaries.txt (\"frontend/src/features/home/HomeScreen.tsx\": \"... in-list search input for filtering same-city profiles by name ...\")"
+      ]
+    }
+  ],
+  "confidence": 0.67,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/features/auth/LoginScreen.tsx",
+    "frontend/src/features/chat/ChatListScreen.tsx",
+    "frontend/src/features/chat/ChatThreadScreen.tsx",
+    "frontend/src/features/city/CityPickerSheet.tsx",
+    "frontend/src/features/home/UserCard.tsx",
+    "frontend/src/features/home/UserPreviewSheet.tsx",
+    "frontend/src/features/moderation/ReportDialog.tsx",
+    "frontend/src/features/profile/ProfileScreen.tsx",
+    "frontend/src/features/shared/motion/AmbientSparkles.tsx",
+    "frontend/src/features/shared/motion/LiftCard.tsx",
+    "frontend/src/features/shared/motion/Pressable.tsx",
+    "frontend/src/features/shared/motion/PressableRow.tsx",
+    "frontend/src/features/shared/motion/ScreenTransition.tsx",
+    "frontend/src/features/shared/motion/useReducedMotion.ts",
+    "frontend/src/features/shell/AppShell.tsx",
+    "frontend/src/features/shell/BottomNav.tsx",
+    "frontend/src/index.css",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

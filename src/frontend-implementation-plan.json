@@ -1,0 +1,226 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Premium iOS-style romantic pastel theme, touch motion, and lightweight micro-animations",
+  "requirements": [
+    {
+      "id": "REQ-29",
+      "summary": "Apply a romantic, soft iOS-inspired pastel theme (pink/purple/soft red), subtle gradients, and gentle glow consistently across all screens and overlays.",
+      "acceptanceCriteria": [
+        "Global CSS variables and/or Tailwind theme tokens are updated so primary/secondary/accent/background/card colors reflect a romantic pastel palette with light gradients and subtle glow.",
+        "Key surfaces (headers, cards, bottom navigation, dialogs/sheets) visually match the updated theme without reducing readability/contrast.",
+        "No new user-facing text is introduced; any existing user-facing text remains English.",
+        "Theme changes do not break existing layouts on small screens."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Update global CSS variables to a romantic pastel palette (pink/purple/soft red tones) and add minimal global utilities for subtle gradients/glow (e.g., app background gradient, elevated surface glow) while preserving readability and iOS-HIG cleanliness. Ensure shadcn-ui tokens (card/popover/border/ring) still map correctly. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind theme to support the romantic look with additional keyframes/animations and any needed semantic colors/shadows (e.g., soft glow shadow presets) while keeping defaults minimal. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shell/BottomNav.tsx",
+          "operation": "modify",
+          "description": "Restyle BottomNav surface to match the new theme (subtle gradient/blur, soft border, refined active state) while maintaining contrast and tap targets. Apply pressed-state styling that aligns with iOS feel. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/auth/LoginScreen.tsx",
+          "operation": "modify",
+          "description": "Update login screen surfaces (background, icon container shadow/glow, footer surface) to match romantic pastel theme without changing any user-facing copy. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/city/CityPickerSheet.tsx",
+          "operation": "modify",
+          "description": "Adjust sheet styling (rounded top, background, separators, selected city styling) to match the updated romantic theme; keep shadcn-ui sheet behavior intact. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/moderation/ReportDialog.tsx",
+          "operation": "modify",
+          "description": "Ensure dialog surface and actions match the updated theme (card/popover colors, borders, focus ring and subtle glow) using existing shadcn-ui tokens and utilities; do not add or change user-facing text. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-30",
+      "summary": "Implement reusable iOS-style live touch motion (press/bounce for buttons, lift for cards, subtle pressed feedback for rows/nav) and apply consistently across the app.",
+      "acceptanceCriteria": [
+        "Primary interactive controls (e.g., Login button, Profile actions, Chat send/back buttons, BottomNav tab buttons) show a smooth press animation (scale + bounce) on pointer/touch interactions.",
+        "Discovery cards (e.g., user cards) show a gentle lift (translate/scale) and shadow enhancement on press, and return smoothly on release/cancel.",
+        "Chat list rows and other tappable rows have a subtle pressed feedback that feels iOS-like and consistent with the rest of the app.",
+        "Animations are implemented in a reusable way (e.g., shared utility classes and/or shared wrapper component) and are applied consistently without duplicating bespoke animation code per screen."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/shared/motion/useReducedMotion.ts",
+          "operation": "create",
+          "description": "Create a small hook to detect system `prefers-reduced-motion` and expose a boolean used by touch motion and transitions to minimize/disable effects. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shared/motion/Pressable.tsx",
+          "operation": "create",
+          "description": "Add a reusable Pressable wrapper that provides iOS-style press feedback (scale down on press + quick bounce-back on release/cancel) using transforms/opacity only, and automatically respects reduced-motion. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shared/motion/LiftCard.tsx",
+          "operation": "create",
+          "description": "Add a reusable LiftCard wrapper for discovery/profile cards that gently lifts (translate/scale) and increases shadow on press, returning smoothly on release; respect reduced-motion. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shared/motion/PressableRow.tsx",
+          "operation": "create",
+          "description": "Add a reusable wrapper for list rows and nav items to provide subtle pressed-state background/tint feedback consistent with iOS. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/auth/LoginScreen.tsx",
+          "operation": "modify",
+          "description": "Apply the shared Pressable behavior to the primary login button to get consistent press/bounce motion. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shell/BottomNav.tsx",
+          "operation": "modify",
+          "description": "Wrap BottomNav tab buttons with PressableRow/Pressable to provide consistent subtle pressed feedback and premium tap motion across tabs. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/home/UserCard.tsx",
+          "operation": "modify",
+          "description": "Replace per-card bespoke active styles with the shared LiftCard behavior to ensure consistent gentle lift/shadow on press for discovery cards. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/chat/ChatListScreen.tsx",
+          "operation": "modify",
+          "description": "Apply PressableRow to chat list rows for subtle iOS-like pressed feedback (without adding custom per-row animation logic). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/chat/ChatThreadScreen.tsx",
+          "operation": "modify",
+          "description": "Apply Pressable behavior to key interactive controls (back button and send button) while keeping shadcn Button components unchanged (wrap/compose rather than editing immutable UI component files). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/profile/ProfileScreen.tsx",
+          "operation": "modify",
+          "description": "Apply Pressable behavior to Profile actions (logout icon button, edit button) for consistent touch motion. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/city/CityPickerSheet.tsx",
+          "operation": "modify",
+          "description": "Apply PressableRow/Pressable to popular city items and the Select button to align touch feedback with the rest of the app. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/home/UserPreviewSheet.tsx",
+          "operation": "modify",
+          "description": "Apply Pressable to key sheet actions (Start Chat / Block / Report) to ensure consistent tap feedback across sheets/dialogs. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "summary": "Add premium fade + slight slide screen transitions for tab changes and chat thread navigation without jank.",
+      "acceptanceCriteria": [
+        "Switching between BottomNav tabs uses a fade + slide transition that completes quickly (premium feel) and does not block interaction longer than necessary.",
+        "Entering a ChatThread and returning to ChatList uses the same fade + slide transition style for visual consistency.",
+        "Transitions do not cause scroll position bugs or content flashing during navigation.",
+        "On low-power devices, transitions remain smooth and do not noticeably degrade scrolling performance in lists."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/shared/motion/ScreenTransition.tsx",
+          "operation": "create",
+          "description": "Create a lightweight transition wrapper that animates between keyed screens using opacity + small translate (fade + slight slide). Ensure it is transform-based, short duration, and respects reduced-motion. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Add Tailwind keyframes/animations for fade+slide enter/exit (and any needed easing curves) tuned for a premium iOS feel; ensure reduced-motion variants can disable these. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shell/AppShell.tsx",
+          "operation": "modify",
+          "description": "Wrap rendered tab content and chat thread content in the shared ScreenTransition keyed by activeTab/activeChatId so tab switches and chat enter/exit use the same fade+slide transition style. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-32",
+      "summary": "Add subtle anime-inspired micro-animations: sparse ambient hearts/sparks, avatar entrance animations, and gentle breathing on prominent avatars.",
+      "acceptanceCriteria": [
+        "Profile photo/avatars have a gentle breathing animation that is subtle (low amplitude) and does not distract from content.",
+        "At least one tasteful ambient hearts/spark micro-animation is present in the UI (implemented lightweight), and it is subtle enough to preserve a clean iOS-HIG feel.",
+        "Avatars/images in key entry points (e.g., discovery cards and/or profile header) have a smooth entrance animation that runs once when they appear.",
+        "Micro-animations do not reduce text readability, do not obscure primary actions, and do not introduce significant CPU usage during idle."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/shared/motion/AmbientSparkles.tsx",
+          "operation": "create",
+          "description": "Add a lightweight ambient hearts/sparkles accent component implemented via CSS animations (no heavy libraries; no continuous JS loops) and designed to be used sparingly. Ensure it supports reduced-motion. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Add minimal keyframes/animations for (1) subtle float/ambient sparkle, (2) avatar entrance (opacity+small translate/scale), and (3) gentle breathing (low amplitude scale), with motion-safe defaults. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/auth/LoginScreen.tsx",
+          "operation": "modify",
+          "description": "Use the AmbientSparkles component sparingly (e.g., behind the central branding area) and add a subtle entrance animation to the app icon to establish the anime micro-animation tone without clutter. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/home/UserCard.tsx",
+          "operation": "modify",
+          "description": "Apply a one-time entrance animation to discovery card images/avatars when they appear, keeping it subtle and transform-based. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/home/UserPreviewSheet.tsx",
+          "operation": "modify",
+          "description": "Apply a subtle entrance animation to the preview image and (optionally) a very gentle breathing animation if the avatar is a prominent focus, ensuring it does not obscure actions. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/profile/ProfileScreen.tsx",
+          "operation": "modify",
+          "description": "Apply the gentle breathing animation to the profile avatar/photo (subtle, low amplitude), and ensure it remains non-distracting. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-33",
+      "summary": "Keep motion performance-friendly and respect `prefers-reduced-motion` by minimizing/disabling animations when requested.",
+      "acceptanceCriteria": [
+        "When `prefers-reduced-motion: reduce` is active, press/bounce, breathing, ambient hearts/sparks, and page transitions are disabled or significantly reduced while keeping the UI usable.",
+        "Animations use lightweight techniques (CSS transforms/opacity where possible) to avoid layout thrashing and keep scrolling smooth.",
+        "No new long-running timers/intervals are introduced that continuously repaint at high frequency when the app is idle."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add/confirm global reduced-motion safeguards via `@media (prefers-reduced-motion: reduce)` to disable/shorten key animations/transitions (including any new micro-animations) and ensure usability remains intact. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shared/motion/useReducedMotion.ts",
+          "operation": "modify",
+          "description": "Ensure the reduced-motion hook is used consistently by Pressable/LiftCard/ScreenTransition/AmbientSparkles so JS-triggered bounce and enter/exit effects are minimized/disabled when requested. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shared/motion/Pressable.tsx",
+          "operation": "modify",
+          "description": "Guarantee press/bounce uses transform/opacity only and avoids timers/intervals; when reduced-motion is enabled, fall back to a minimal pressed state (or none). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shared/motion/ScreenTransition.tsx",
+          "operation": "modify",
+          "description": "Ensure transitions use short durations and transform/opacity only, and are disabled/reduced under reduced-motion to prevent jank on low-power devices. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/shared/motion/AmbientSparkles.tsx",
+          "operation": "modify",
+          "description": "Ensure ambient hearts/sparks are CSS-only, sparse, and fully disabled (or effectively static) under reduced-motion; avoid adding any continuous repaint loops while idle. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

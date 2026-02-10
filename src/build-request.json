@@ -1,0 +1,116 @@
+{
+  "kind": "build_request",
+  "title": "Add premium iOS-style touch motion, page transitions, and romantic pastel theme with lightweight anime micro-animations",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-29",
+      "text": "Update the global visual theme to a romantic, soft iOS-inspired palette using pastel pink/purple/soft red tones, light gradients, and subtle glow effects, while keeping the UI clean and minimal (not over-animated). Apply the theme consistently across all screens (Login, Home/People discovery, Chat list/thread, Profile, sheets/dialogs).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Theme:\n\nRomantic and soft theme\n\nUse pastel colors (pink, purple, soft red tones)\n\nLight gradients\n\nSoft glow effects\n\nStyle rules:\n\nFollow iOS Human Interface style\n\nClean, minimal, not over-animated"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Global CSS variables and/or Tailwind theme tokens are updated so primary/secondary/accent/background/card colors reflect a romantic pastel palette with light gradients and subtle glow.",
+        "Key surfaces (headers, cards, bottom navigation, dialogs/sheets) visually match the updated theme without reducing readability/contrast.",
+        "No new user-facing text is introduced; any existing user-facing text remains English.",
+        "Theme changes do not break existing layouts on small screens."
+      ]
+    },
+    {
+      "id": "REQ-30",
+      "text": "Implement reusable iOS-style live touch motion for interactive elements across the app: (1) buttons slightly scale down then bounce back on tap, (2) cards gently lift with a stronger shadow on touch/press, and (3) bottom navigation items and list rows get a subtle pressed-state feedback. Use a shared, reusable approach so the behavior is consistent across screens.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "UI motion rules:\n\nAdd smooth live motion on touch\n\nButtons should slightly scale and bounce when tapped\n\nCards should gently lift with shadow on touch"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Primary interactive controls (e.g., Login button, Profile actions, Chat send/back buttons, BottomNav tab buttons) show a smooth press animation (scale + bounce) on pointer/touch interactions.",
+        "Discovery cards (e.g., user cards) show a gentle lift (translate/scale) and shadow enhancement on press, and return smoothly on release/cancel.",
+        "Chat list rows and other tappable rows have a subtle pressed feedback that feels iOS-like and consistent with the rest of the app.",
+        "Animations are implemented in a reusable way (e.g., shared utility classes and/or shared wrapper component) and are applied consistently without duplicating bespoke animation code per screen."
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "text": "Add smooth page/screen transitions (fade + slight slide) when switching between main tabs (Home/People/Chat/Profile) and when entering/exiting a chat thread. Ensure transitions feel premium and do not introduce layout jank.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Smooth page transitions (fade + slide)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Switching between BottomNav tabs uses a fade + slide transition that completes quickly (premium feel) and does not block interaction longer than necessary.",
+        "Entering a ChatThread and returning to ChatList uses the same fade + slide transition style for visual consistency.",
+        "Transitions do not cause scroll position bugs or content flashing during navigation.",
+        "On low-power devices, transitions remain smooth and do not noticeably degrade scrolling performance in lists."
+      ]
+    },
+    {
+      "id": "REQ-32",
+      "text": "Add subtle anime-inspired micro-animations that remain lightweight: (1) very light floating hearts or spark effects used sparingly as ambient UI accents, (2) smooth avatar entrance animation where avatars/cards/images appear, and (3) gentle breathing animation on profile photos/avatars (e.g., on the Profile screen and other prominent avatar displays).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Anime-style animation:\n\nSubtle anime-inspired micro animations\n\nFloating hearts or spark effects (very light)\n\nSmooth avatar entrance animation\n\nGentle breathing animation on profile photos"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Profile photo/avatars have a gentle breathing animation that is subtle (low amplitude) and does not distract from content.",
+        "At least one tasteful ambient hearts/spark micro-animation is present in the UI (implemented lightweight), and it is subtle enough to preserve a clean iOS-HIG feel.",
+        "Avatars/images in key entry points (e.g., discovery cards and/or profile header) have a smooth entrance animation that runs once when they appear.",
+        "Micro-animations do not reduce text readability, do not obscure primary actions, and do not introduce significant CPU usage during idle."
+      ]
+    },
+    {
+      "id": "REQ-33",
+      "text": "Ensure all motion and effects remain performance-friendly and respect accessibility preferences: provide reduced-motion behavior via the user’s system setting so animations are minimized/disabled when `prefers-reduced-motion` is enabled.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Keep performance fast and animations lightweight."
+        ]
+      },
+      "acceptanceCriteria": [
+        "When `prefers-reduced-motion: reduce` is active, press/bounce, breathing, ambient hearts/sparks, and page transitions are disabled or significantly reduced while keeping the UI usable.",
+        "Animations use lightweight techniques (CSS transforms/opacity where possible) to avoid layout thrashing and keep scrolling smooth.",
+        "No new long-running timers/intervals are introduced that continuously repaint at high frequency when the app is idle."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify any files under the immutable frontend paths listed in SYSTEM_CONTEXT (e.g., frontend/src/components/ui and the Internet Identity/actor hooks). Compose or wrap existing UI components instead.",
+    "Keep all user-facing copy in English.",
+    "Keep animations minimal and iOS Human Interface Guideline-aligned: premium and smooth, not over-animated.",
+    "Do not introduce new backend changes for these UI/animation updates."
+  ],
+  "nonGoals": [
+    "Adding new product features (filters, new screens, new chat/discovery logic).",
+    "Changing subscription/plan logic or backend enforcement.",
+    "Introducing heavy animation libraries or real-time rendering that would significantly increase bundle size or degrade performance."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}
